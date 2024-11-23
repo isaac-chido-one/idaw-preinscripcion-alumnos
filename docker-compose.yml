@@ -1,0 +1,18 @@
+version: "2"
+
+services:
+  idaw-node:
+    image: "node:20.11.1-bookworm"
+    container_name: idaw-node
+    user: "node"
+    working_dir: /home/node/app
+    entrypoint: ["tail", "-f", "/dev/null"]
+    #entrypoint: ["node", "src/index.js"]
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./:/home/node/app
+    expose:
+      - "8888"
+    ports:
+      - "8888:80"
