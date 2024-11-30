@@ -8,6 +8,7 @@ services:
     working_dir: /home/node/app
     entrypoint: ["tail", "-f", "/dev/null"]
     #entrypoint: ["node", "src/index.js"]
+    #entrypoint: ["npx", "nodemon", "-L", "--watch", "src", "-e", "js,mjs,cjs,json,ejs", "src/index.js"]
     environment:
       - NODE_ENV=production
     volumes:
