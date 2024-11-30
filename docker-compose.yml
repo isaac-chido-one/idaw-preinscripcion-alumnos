@@ -13,6 +13,6 @@ services:
     volumes:
       - ./:/home/node/app
     expose:
-      - "8888"
+      - "9080"
     ports:
-      - "8888:8888"
+      - "9080:9080"
