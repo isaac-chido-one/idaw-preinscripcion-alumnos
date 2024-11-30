@@ -4,7 +4,7 @@
 1. Instalar git [https://git-scm.com/downloads/win](URL)
 2. Abrir la terminal o la línea de comandos.
 3. En la terminal ir o crear una carpeta para descargar el código.
-4. Ejecutar el siguiente comando: git clone [https://github.com/isaac-chido-one/idaw-preinscripcion-alumnos.git](URL)
+4. Ejecutar el siguiente comando: `git clone https://github.com/isaac-chido-one/idaw-preinscripcion-alumnos.git`
 5. Ir a la carpeta creada idaw-preinscripcion-alumnos
 
 ## Pasos para bajar el código comprimido
@@ -17,11 +17,9 @@
 2. Probar que node esté instalado correctamente ejecutando en la terminal: `node -v`
 3. Probar que npm funcione correctamente ejecutando en la terminal: `npm -v`
 4. Instalar paquetes de node con comando: `npm install`
-5. Editar el archivo src/index.js en la línea 3, cambiar el puerto 80 por uno que esté disponible en nuestro entrono local, por ejemplo: 8080, 8081, 8888, etc. Un ejemplo:
-> app.listen(8888, () => console.log('Server on port 8888'));
-6. En la terminal, en la carpeta idaw-preinscripcion-alumnos ejecutar el siguiente comando para levantar el servicio: `node src/index.js`
-7. En el navegador abrir la URl [http://localhost:8888/](URL)
-8. Presionar Ctrl + C para detener el servicio.
+5. En la terminal, en la carpeta idaw-preinscripcion-alumnos ejecutar el siguiente comando para levantar el servicio: `node src/index.js`
+6. En el navegador abrir la URl [http://localhost:8888/](URL)
+7. Presionar Ctrl + C para detener el servicio.
 
 ## Pasos para levantar el servicio con docker
 1. Instalar docker [https://www.docker.com/](URL)
