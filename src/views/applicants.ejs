@@ -1,5 +1,124 @@
 <%- include('templates/header') %>
-<div class="container">
-    Formulario
-</div>    
+
+<main>
+    <div class="row g-5">
+        <div class="col-md-7 col-lg-8">
+            <h4 class="mb-3">Información personal</h4>
+            <form class="needs-validation" novalidate>
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label for="firstName" class="form-label">Primer apellido</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                        <div class="invalid-feedback">
+                            El primer apellido es requerido.
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="lastName" class="form-label">Segundo apellido</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="" value="">
+                        <div class="invalid-feedback">
+                            El segundo apellido es requerido.
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="givenName" class="form-label">Nombres</label>
+                        <input type="text" class="form-control" id="givenName" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Los nombres son requeridos.
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="dob" class="form-label">Fecha de nacimiento</label>
+                        <input type="date" class="form-control" id="dob" placeholder="" required max="2024-12-31" min="1924-01-01">
+                        <div class="invalid-feedback">
+                            La fecha de nacimiento es requerida.
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="state" class="form-label">Estado de nacimiento</label>
+                        <select type="text" class="form-control" id="state" placeholder="" required>
+                            <option value="">Seleccionar ...</option>
+                            <option value="AS">Aguascalientes</option>
+                            <option value="BC">Baja California</option>
+                            <option value="BS">Baja California Sur</option>
+                            <option value="CC">Campeche</option>
+                            <option value="CL">Coahuila</option>
+                            <option value="CM">Colima</option>
+                            <option value="CS">Chiapas</option>
+                            <option value="CH">Chihuahua</option>
+                            <option value="CX">Ciudad de México</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="DG">Durango</option>
+                            <option value="GT">Guanajuato</option>
+                            <option value="GR">Guerrero</option>
+                            <option value="HG">Hidalgo</option>
+                            <option value="JC">Jalisco</option>
+                            <option value="MC">México</option>
+                            <option value="MN">Michoacán</option>
+                            <option value="MS">Morelos</option>
+                            <option value="NT">Nayarit</option>
+                            <option value="NL">Nuevo León</option>
+                            <option value="OC">Oaxaca</option>
+                            <option value="PL">Puebla</option>
+                            <option value="QT">Querétaro</option>
+                            <option value="QR">Quintana Roo</option>
+                            <option value="SP">San Luis Potosí</option>
+                            <option value="SL">Sinaloa</option>
+                            <option value="SR">Sonora</option>
+                            <option value="TC">Tabasco</option>
+                            <option value="TS">Tamaulipas</option>
+                            <option value="TL">Tlaxcala</option>
+                            <option value="VZ">Veracruz</option>
+                            <option value="YN">Yucatán</option>
+                            <option value="ZS">Zacatecas</option>
+                            <hr />
+                            <option value="NE">Nacido en el Extranjero</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            El estado de nacimiento es requerido.
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
+                <div class="row gy-3">
+                    <div class="col-md-4">
+                        <button class="w-100 btn btn-info" type="button">Generar CURP</button>
+                    </div>
+
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="curp" placeholder="" required>
+                        <div class="invalid-feedback">
+                            La CURP es requerida.
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
+                <h4 class="mb-3">Comprobante</h4>
+
+                <div class="row gy-3">
+                    <div class="col-md-6">
+                    <label for="voucher" class="form-label">Comprobante de pago</label>
+                    <input type="file" class="form-control" id="voucher" required>
+                    <small class="text-muted">Archivo de imagen: png, jpg, jpeg, bmp o gif.</small>
+                    <div class="invalid-feedback">
+                        El comprobante es requerido.
+                    </div>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
+                <button class="w-100 btn btn-primary btn-lg" type="submit">Registrar preinscripción</button>
+            </form>
+        </div>
+    </div>
+</main>
 <%- include('templates/footer') %>
