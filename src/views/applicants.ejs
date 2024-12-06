@@ -7,35 +7,27 @@
             <form class="needs-validation" novalidate method="POST" action="/applicants/store" enctype="multipart/form-data">
                 <div class="row g-3">
                     <div class="col-12">
-                        <label for="firstName" class="form-label">Primer apellido</label>
-                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="" required>
-                        <div class="invalid-feedback">
-                            El primer apellido es requerido.
-                        </div>
+                        <label for="lastName" class="form-label">Primer apellido</label>
+                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="" required>
+                        <div class="invalid-feedback"></div>
                     </div>
 
                     <div class="col-12">
-                        <label for="lastName" class="form-label">Segundo apellido</label>
-                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="">
-                        <div class="invalid-feedback">
-                            El segundo apellido es requerido.
-                        </div>
+                        <label for="secondLastName" class="form-label">Segundo apellido</label>
+                        <input type="text" class="form-control" id="secondLastName" name="secondLastName" placeholder="" value="">
+                        <div class="invalid-feedback"></div>
                     </div>
 
                     <div class="col-12">
-                        <label for="givenName" class="form-label">Nombres</label>
-                        <input type="text" class="form-control" id="givenName" name="givenName" placeholder="" required>
-                        <div class="invalid-feedback">
-                            Los nombres son requeridos.
-                        </div>
+                        <label for="firstName" class="form-label">Nombres</label>
+                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" required>
+                        <div class="invalid-feedback"></div>
                     </div>
 
                     <div class="col-12">
                         <label for="dob" class="form-label">Fecha de nacimiento</label>
                         <input type="date" class="form-control" id="dob" name="dob" placeholder="" required max="2024-12-31" min="1924-01-01">
-                        <div class="invalid-feedback">
-                            La fecha de nacimiento es requerida.
-                        </div>
+                        <div class="invalid-feedback"></div>
                     </div>
 
                     <div class="col-12">
@@ -78,9 +70,7 @@
                             <hr />
                             <option value="NE">Nacido en el Extranjero</option>
                         </select>
-                        <div class="invalid-feedback">
-                            El estado de nacimiento es requerido.
-                        </div>
+                        <div class="invalid-feedback"></div>
                     </div>
                 </div>
 
@@ -93,9 +83,7 @@
 
                     <div class="col-md-8">
                         <input type="text" class="form-control" id="curp" name="curp" placeholder="" required>
-                        <div class="invalid-feedback">
-                            La CURP es requerida.
-                        </div>
+                        <div class="invalid-feedback"></div>
                     </div>
                 </div>
 
@@ -108,9 +96,7 @@
                     <label for="voucher" class="form-label">Comprobante de pago</label>
                     <input type="file" class="form-control" id="voucher" name="voucher" required>
                     <small class="text-muted">Archivo de imagen: png, jpg, jpeg, bmp o gif.</small>
-                    <div class="invalid-feedback">
-                        El comprobante es requerido.
-                    </div>
+                    <div class="invalid-feedback"></div>
                     </div>
                 </div>
 

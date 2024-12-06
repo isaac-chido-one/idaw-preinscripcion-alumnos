@@ -6,6 +6,8 @@ const app = express();
 const multer  = require('multer');
 const upload = multer();
 
+const applicantsController = require('../controllers/ApplicantsController');
+
 router.get('/', (req, res) => {
     res.render('index', {});
 });
@@ -22,12 +24,6 @@ router.get('/responsibles', (req, res) => {
     res.render('responsibles', {});
 });
 
-router.post('/applicants/store', upload.single('voucher'), (req, res, next) => {
-    res.json({
-        msg: 'hola',
-        body: req.body,
-        file: req.file
-    });
-});
+router.post('/applicants/store', upload.single('voucher'), applicantsController.store);
 
 module.exports = router;
