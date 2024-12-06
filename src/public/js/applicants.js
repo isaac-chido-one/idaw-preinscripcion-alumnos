@@ -1,20 +1,38 @@
 (() => {
 	'use strict'
 
-	// Fetch all the forms we want to apply custom Bootstrap validation styles to
-	const forms = document.querySelectorAll('.needs-validation')
+	function responseApplicantStore(responseText, statusText, xhr, $form) {
+		console.log(xhr.responseJSON);
+		console.log(xhr.responseText);
+	};
 
-	// Loop over them and prevent submission
-	Array.from(forms).forEach(form => {
-		form.addEventListener('submit', event => {
-			if (form.checkValidity()) {
-				storeApplicant();
+	function requestApplicantStore() {
+		const form = $('form.needs-validation');
+		form.ajaxSubmit({
+			dataType: 'json',
+			method: 'POST',
+			resetForm: false,
+			//target: '#myResultsDiv'
+			success: responseApplicantStore,
+			type: 'POST'
+		});
+	};
+
+
+	function initializeApplicants() {
+		const form = $('form.needs-validation');
+
+		form.on('submit', function(e) {
+			e.preventDefault(); // prevent native submit
+
+			if (form.get(0).checkValidity()) {
+				requestApplicantStore();
 			} else {
-				event.preventDefault()
-				event.stopPropagation()
+				form.addClass('was-validated');
 			}
+		});
+	};
 
-			form.classList.add('was-validated');
-		}, false)
-	})
-})()
+	window.setTimeout(initializeApplicants);
+
+})();

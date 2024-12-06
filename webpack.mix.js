@@ -5,3 +5,4 @@ mix.copyDirectory('node_modules/bootstrap-icons/font/fonts/', 'src/public/fonts/
 mix.options({
     processCssUrls: false
 });
+mix.copy('node_modules/jquery-form/dist/jquery.form.min.js', 'src/public/js/jquery.form.min.js');

@@ -4,11 +4,11 @@
     <div class="row g-5">
         <div class="col-md-7 col-lg-8">
             <h4 class="mb-3">Información personal</h4>
-            <form class="needs-validation" novalidate>
+            <form class="needs-validation" novalidate method="POST" action="/applicants/store" enctype="multipart/form-data">
                 <div class="row g-3">
                     <div class="col-12">
                         <label for="firstName" class="form-label">Primer apellido</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="" required>
                         <div class="invalid-feedback">
                             El primer apellido es requerido.
                         </div>
@@ -16,7 +16,7 @@
 
                     <div class="col-12">
                         <label for="lastName" class="form-label">Segundo apellido</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="" value="">
+                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="">
                         <div class="invalid-feedback">
                             El segundo apellido es requerido.
                         </div>
@@ -24,7 +24,7 @@
 
                     <div class="col-12">
                         <label for="givenName" class="form-label">Nombres</label>
-                        <input type="text" class="form-control" id="givenName" placeholder="" required>
+                        <input type="text" class="form-control" id="givenName" name="givenName" placeholder="" required>
                         <div class="invalid-feedback">
                             Los nombres son requeridos.
                         </div>
@@ -32,7 +32,7 @@
 
                     <div class="col-12">
                         <label for="dob" class="form-label">Fecha de nacimiento</label>
-                        <input type="date" class="form-control" id="dob" placeholder="" required max="2024-12-31" min="1924-01-01">
+                        <input type="date" class="form-control" id="dob" name="dob" placeholder="" required max="2024-12-31" min="1924-01-01">
                         <div class="invalid-feedback">
                             La fecha de nacimiento es requerida.
                         </div>
@@ -40,7 +40,7 @@
 
                     <div class="col-12">
                         <label for="state" class="form-label">Estado de nacimiento</label>
-                        <select type="text" class="form-control" id="state" placeholder="" required>
+                        <select type="text" class="form-control" id="state" name="state" placeholder="" required>
                             <option value="">Seleccionar ...</option>
                             <option value="AS">Aguascalientes</option>
                             <option value="BC">Baja California</option>
@@ -92,7 +92,7 @@
                     </div>
 
                     <div class="col-md-8">
-                        <input type="text" class="form-control" id="curp" placeholder="" required>
+                        <input type="text" class="form-control" id="curp" name="curp" placeholder="" required>
                         <div class="invalid-feedback">
                             La CURP es requerida.
                         </div>
@@ -106,7 +106,7 @@
                 <div class="row gy-3">
                     <div class="col-md-6">
                     <label for="voucher" class="form-label">Comprobante de pago</label>
-                    <input type="file" class="form-control" id="voucher" required>
+                    <input type="file" class="form-control" id="voucher" name="voucher" required>
                     <small class="text-muted">Archivo de imagen: png, jpg, jpeg, bmp o gif.</small>
                     <div class="invalid-feedback">
                         El comprobante es requerido.

@@ -34,8 +34,8 @@
 10. Para detener el contenedor el comando: `docker-compose down -v`
 
 URL del código fuente: [https://github.com/isaac-chido-one/idaw-preinscripcion-alumnos](URL)<br>
-Compilar assets: `npx mix`<br>
-Levantar servicio para desarrollo `npx nodemon -L --watch src -e js,mjs,cjs,json,ejs src/index.js`
+Compilar assets: `npm run build`<br>
+Levantar servicio para desarrollo `npm run server`
 
 ***
 
