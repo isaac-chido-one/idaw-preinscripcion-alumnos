@@ -1,6 +1,5 @@
 .env
-data
-!data/.gitkeep
+data/db
 !data/db/.gitkeep
 node_modules
 storage
