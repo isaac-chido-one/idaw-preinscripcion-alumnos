@@ -38,8 +38,12 @@
 	}
 
 	function responseApplicantStore(responseText, statusText, xhr, $form) {
-		if (xhr.responseJSON.status == 'failure') {
+		if (xhr.responseJSON.status == 'success') {
+			notifySuccess(xhr.responseJSON.message);
+		} else if (xhr.responseJSON.status == 'failure') {
 			showBackValidations(xhr.responseJSON.data);
+		} else {
+			console.warn(xhr.responseJSON);
 		}
 	}
 

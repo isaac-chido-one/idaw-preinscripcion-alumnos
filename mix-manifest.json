@@ -1,7 +1,8 @@
 {
     "/src/public/app.js": "/src/public/app.js",
     "/src/public/app.css": "/src/public/app.css",
-    "/src/public/fonts/bootstrap-icons.woff": "/src/public/fonts/bootstrap-icons.woff",
-    "/src/public/fonts/bootstrap-icons.woff2": "/src/public/fonts/bootstrap-icons.woff2",
-    "/src/public/js/jquery.form.min.js": "/src/public/js/jquery.form.min.js"
+    "/src/public/css/fonts/bootstrap-icons.woff": "/src/public/css/fonts/bootstrap-icons.woff",
+    "/src/public/css/fonts/bootstrap-icons.woff2": "/src/public/css/fonts/bootstrap-icons.woff2",
+    "/src/public/js/jquery.form.min.js": "/src/public/js/jquery.form.min.js",
+    "/src/public/js/bootstrap-notify.min.js": "/src/public/js/bootstrap-notify.min.js"
 }

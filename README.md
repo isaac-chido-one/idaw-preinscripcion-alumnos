@@ -23,15 +23,16 @@
 
 ## Pasos para levantar el servicio con docker
 1. Instalar docker [https://www.docker.com/](URL)
-2. En la terminal, en la carpeta idaw-preinscripcion-alumnos ejecutar el siguiente comando sólo la primera vez para construir el contenedor: `docker-compose up -d --build`
-3. Para ejecutar el contenedor el comando: `docker-compose up -d`
-4. Ingresar al contenedor con el comando: `docker exec -it idaw-node bash`
-5. Instalar paquetes de node con comando: `npm install`
-6. Levantar el servicio con el comando: `node src/index.js`
-7. En el navegador abrir la URl [http://localhost:9080/](URL)
-8. Presionar Ctrl + C para detener el servicio.
-9. Comando para salir del contenedor: `exit`
-10. Para detener el contenedor el comando: `docker-compose down -v`
+2. Dar permisos de escritura a carpeta data: `chmod -R 0777 data`
+3. En la terminal, en la carpeta idaw-preinscripcion-alumnos ejecutar el siguiente comando sólo la primera vez para construir el contenedor: `docker-compose up -d --build`
+4. Para ejecutar el contenedor el comando: `docker-compose up -d`
+5. Ingresar al contenedor con el comando: `docker exec -it idaw-node bash`
+6. Instalar paquetes de node con comando: `npm install`
+7. Levantar el servicio con el comando: `node src/index.js`
+8. En el navegador abrir la URl [http://localhost:9080/](URL)
+9. Presionar Ctrl + C para detener el servicio.
+10. Comando para salir del contenedor: `exit`
+11. Para detener el contenedor el comando: `docker-compose down -v`
 
 URL del código fuente: [https://github.com/isaac-chido-one/idaw-preinscripcion-alumnos](URL)<br>
 Compilar assets: `npm run build`<br>
