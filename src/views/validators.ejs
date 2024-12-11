@@ -1,3 +1,42 @@
 <%- include('templates/header') %>
-Servicios escolares
+
+<table id="table-validate" class="display table table-striped" style="width:100%;">
+	<thead>
+		<tr>
+			<th>CURP</th>
+			<th>Primer apellido</th>
+			<th>Segundo apellido</th>
+			<th>Nombres</th>
+			<th>Fecha nac.</th>
+			<th>Estado</th>
+			<th>Comprobante</th>
+		</tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
+
+<div class="modal" tabindex="-1" id="modal-voucher">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Comprobante de pago</h5>
+				<button type="button" class="btn-close js-modal-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+			</div>
+			<div class="modal-body">
+		  		<img src="" style="max-width: 100%; max-height: 100%;" />
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary js-modal-close" data-bs-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-primary">Validar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="d-none js-template-btn-voucher">
+	<a href="#" class="js-voucher" title=""><i class="bi"></i></a>
+</div>
+
+<script src="/js/validators.js"></script>
 <%- include('templates/footer') %>

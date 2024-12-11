@@ -4,5 +4,7 @@
     "/src/public/css/fonts/bootstrap-icons.woff": "/src/public/css/fonts/bootstrap-icons.woff",
     "/src/public/css/fonts/bootstrap-icons.woff2": "/src/public/css/fonts/bootstrap-icons.woff2",
     "/src/public/js/jquery.form.min.js": "/src/public/js/jquery.form.min.js",
-    "/src/public/js/bootstrap-notify.min.js": "/src/public/js/bootstrap-notify.min.js"
+    "/src/public/js/bootstrap-notify.min.js": "/src/public/js/bootstrap-notify.min.js",
+    "/src/public/js/dataTables.js": "/src/public/js/dataTables.js",
+    "/src/public/js/dataTables.bootstrap5.js": "/src/public/js/dataTables.bootstrap5.js"
 }

@@ -7,3 +7,5 @@ mix.options({
 });
 mix.copy('node_modules/jquery-form/dist/jquery.form.min.js', 'src/public/js/jquery.form.min.js');
 mix.copy('node_modules/bootstrap-notify/bootstrap-notify.min.js', 'src/public/js/bootstrap-notify.min.js');
+mix.copy('node_modules/datatables.net/js/dataTables.js', 'src/public/js/dataTables.js');
+mix.copy('node_modules/datatables.net-bs5/js/dataTables.bootstrap5.js', 'src/public/js/dataTables.bootstrap5.js');

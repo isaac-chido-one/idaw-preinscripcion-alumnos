@@ -24,6 +24,10 @@ router.get('/responsibles', (req, res) => {
     res.render('responsibles', {});
 });
 
+router.post('/applicants/index', applicantsController.index);
+
+router.get('/applicants/show/:curp', applicantsController.show);
+
 router.post('/applicants/store', upload.single('voucher'), applicantsController.store);
 
 module.exports = router;
