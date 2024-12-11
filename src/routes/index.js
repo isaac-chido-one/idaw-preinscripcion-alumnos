@@ -30,4 +30,6 @@ router.get('/applicants/show/:curp', applicantsController.show);
 
 router.post('/applicants/store', upload.single('voucher'), applicantsController.store);
 
+router.post('/applicants/update/:curp', applicantsController.update);
+
 module.exports = router;
