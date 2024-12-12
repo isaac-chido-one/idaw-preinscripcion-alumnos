@@ -4,39 +4,14 @@ const fs = require('fs');
 const path = require('path');
 const curpRule = regex(/^[A-Za-z]{4}\d{6}[HMhm][A-Za-z]{5}[A-Za-z0-9]\d$/);
 
-const index = async (req, res, next) => {
-	const applicants = await Applicant.find({}, '-_id -__v');
-
-	res.json({data: applicants});
-};
-
-const show = async (req, res, next) => {
-	const rules = {curp: ['required', curpRule]};
-	const validator = make(req.params, rules);
-
-	if (!validator.validate()) {
-		res.json({
-			status: 'failure',
-			data: validator.errors().all()
-		});
-
-		return;
-	}
-
-	const voucherPath = path.normalize(__dirname + '/../..') + '/storage/' + req.params.curp;
-
-	res.sendFile(voucherPath);
-};
-
-
-const store = async (req, res, next) => {
+const create = async (req, res, next) => {
 	const rules = {
-		curp: ['required', curpRule],
+		curp: ['required', 'string', curpRule],
 		dob: ['required', 'date', regex(/^(19|20)\d{2}\-(0[1-9]|1[012])\-[0-3]\d$/)],
-		firstName: ['required'],
-		lastName: ['required'],
-		secondLastName: [],
-		state: ['required', 'in:AS,BC,BS,CC,CL,CM,CS,CH,CX,DF,DG,GT,GR,HG,JC,MC,MN,MS,NT,NL,OC,PL,QT,QR,SP,SL,SR,TC,TS,TL,VZ,YN,ZS']
+		firstName: ['required', 'string'],
+		lastName: ['required', 'string'],
+		secondLastName: ['string'],
+		state: ['required', 'string', 'in:AS,BC,BS,CC,CL,CM,CS,CH,CX,DF,DG,GT,GR,HG,JC,MC,MN,MS,NT,NL,OC,PL,QT,QR,SP,SL,SR,TC,TS,TL,VZ,YN,ZS']
 	};
 
 	const validator = make(req.body, rules);
@@ -69,13 +44,42 @@ const store = async (req, res, next) => {
 	try {
 		await applicant.save();
 	} catch (err) {
-		console.log(err);
+		res.json({
+			status: 'error',
+			data: err
+		});
+
+		return;
 	}
 
 	res.json({
 		status: 'success',
 		message: 'Información enviada correctamente.'
 	});
+};
+
+const index = async (req, res, next) => {
+	const applicants = await Applicant.find({}, '-_id -__v');
+
+	res.json({data: applicants});
+};
+
+const show = async (req, res, next) => {
+	const rules = {curp: ['required', curpRule]};
+	const validator = make(req.params, rules);
+
+	if (!validator.validate()) {
+		res.json({
+			status: 'failure',
+			data: validator.errors().all()
+		});
+
+		return;
+	}
+
+	const voucherPath = path.normalize(__dirname + '/../..') + '/storage/' + req.params.curp;
+
+	res.sendFile(voucherPath);
 };
 
 const update = async (req, res, next) => {
@@ -106,9 +110,14 @@ const update = async (req, res, next) => {
 	}
 };
 
+const view = async (req, res) => {
+    res.render('applicants', {});
+}
+
 module.exports = {
+	create,
 	index,
 	show,
-	store,
-	update
+	update,
+	view
 };

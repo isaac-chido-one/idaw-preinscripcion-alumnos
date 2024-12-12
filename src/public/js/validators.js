@@ -33,7 +33,7 @@
 					console.warn(response);
 				}
 			},
-			url: '/applicants/update/' + curp,
+			url: '/applicants/update/' + curp
 		});
 	}
 

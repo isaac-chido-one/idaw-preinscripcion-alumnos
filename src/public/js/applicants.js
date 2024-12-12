@@ -1,73 +1,37 @@
 (() => {
 	'use strict'
 
-	function showFrontValidations() {
-		const form = $('form.needs-validation');
-		const inputs = form.find('.form-control[name]');
-
-		inputs.each(function(index) {
-			let text = '';
-
-			if (!this.validity.valid) {
-				text = this.dataset.validationMessage != undefined ? this.dataset.validationMessage : this.validationMessage;
-			}
-
-			$(this).siblings('.invalid-feedback').text(text);
-		});
-
-		form.addClass('was-validated');
-	}
-
-	function showBackValidations(validations) {
-		const form = $('form.needs-validation');
-		const inputs = form.find('.form-control[name]');
-		form.removeClass('was-validated');
-
-		inputs.each(function(index) {
-			const input = $(this);
-			const fieldName = input.attr('name');
-
-			if (fieldName in validations) {
-				input.removeClass('is-valid').addClass('is-invalid');
-				$(this).siblings('.invalid-feedback').text(validations[fieldName]);
-			} else {
-				input.removeClass('is-invalid').addClass('is-valid');
-				$(this).siblings('.invalid-feedback').text('');
-			}
-		});
-	}
-
-	function responseApplicantStore(responseText, statusText, xhr, $form) {
+	function responseApplicantCreate(responseText, statusText, xhr) {
 		if (xhr.responseJSON.status == 'success') {
 			notifySuccess(xhr.responseJSON.message);
 		} else if (xhr.responseJSON.status == 'failure') {
-			showBackValidations(xhr.responseJSON.data);
+			const $form = $('form.needs-validation');
+			showBackValidations($form, xhr.responseJSON.data);
 		} else {
 			console.warn(xhr.responseJSON);
 		}
 	}
 
-	function requestApplicantStore() {
-		const form = $('form.needs-validation');
-		form.ajaxSubmit({
+	function requestApplicantCreate($form) {
+		$form.ajaxSubmit({
 			dataType: 'json',
 			method: 'POST',
 			resetForm: false,
-			success: responseApplicantStore,
+			success: responseApplicantCreate,
 			type: 'POST'
 		});
 	}
 
 	function initializeApplicants() {
-		const form = $('form.needs-validation');
+		const $form = $('form.needs-validation');
 
-		form.on('submit', function(e) {
+		$form.on('submit', function(e) {
 			e.preventDefault(); // prevent native submit
 
-			if (form.get(0).checkValidity()) {
-				requestApplicantStore();
+			if ($form.get(0).checkValidity()) {
+				requestApplicantCreate($form);
 			} else {
-				showFrontValidations();
+				showFrontValidations($form);
 			}
 		});
 	}
