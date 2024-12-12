@@ -37,7 +37,6 @@ const create = async (req, res, next) => {
 		return;
 	}
 
-	const role = parseInt(req.body.role);
 	const salt = crypto.randomBytes(16);
 	crypto.pbkdf2(req.body.password, salt, 310000, 32, 'sha256', async function(err, hashedPassword) {
 		if (err) {
@@ -54,7 +53,7 @@ const create = async (req, res, next) => {
 			password: hashedPassword,
 			salt: salt,
 			name: req.body.name,
-			role: role
+			role: parseInt(req.body.role)
 		};
 
 		const user = new User(properties);
@@ -73,7 +72,7 @@ const create = async (req, res, next) => {
 		res.json({
 			status: 'success',
 			message: 'Usuario creado correctamente.',
-			url: role == 1 ? '/validators' : '/responsibles'
+			url: '/login'
 		});
 	});
 };
@@ -130,7 +129,10 @@ const login = async (req, res, next) => {
 			res.json({
 				status: 'failure',
 				data: {username: ['Las credenciales son incorrectas.']},
-				debug: 'Invalid password'
+				debug: 'Invalid password',
+				d1: req.body.password,
+				d2: user.salt,
+				d3: isValidPassword
 			});
 		}
 	});

@@ -3,7 +3,6 @@
 	function responseLogin(response) {
 		if (response.status == 'success') {
 			const $form = $('form.needs-validation');
-			$form.find('input[name=name]').val('');
 			$form.find('input[name=username]').val('');
 			$form.find('input[name=password]').val('');
 			notifySuccess(response.message);
