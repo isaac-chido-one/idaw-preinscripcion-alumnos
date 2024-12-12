@@ -1,34 +1,38 @@
 const crypto = require('crypto');
-const { make } = require('simple-body-validator');
+const { make, register } = require('simple-body-validator');
 const User = require('../models/user');
+const usernameRules = ['required', 'string', 'email'];
+const passwordRules = ['required', 'string', 'min:6'];
+const validatorAttributes = {
+	name: 'nombre o alias',
+	username: 'e-mail',
+	password: 'contraseña',
+	role: 'rol de usuario'
+};
+
+register('username_avalable', async function(username) {
+	const exists = await User.exists({username: username});
+
+	return !exists;
+}, function () {
+	return 'El usuario ya existe.';
+});
 
 const create = async (req, res, next) => {
-	console.log(req.body);
 	const rules = {
 		name: ['required', 'string'],
-		username: ['required', 'string', 'email'],
-		password: ['required', 'string', 'min:6'],
+		username: ['required', 'string', 'email', 'username_avalable'],
+		password: passwordRules,
 		role: ['required', 'integer', 'in:1,2']
 	};
 
-	const validator = make(req.body, rules);
+	const validator = make(req.body, rules, {}, validatorAttributes);
+	const validationResult = await validator.validateAsync();
 
-	if (!validator.validate()) {
+	if (!validationResult) {
 		res.json({
 			status: 'failure',
 			data: validator.errors().all()
-		});
-
-		return;
-	}
-
-	const username = req.body.username;
-	const exists = await User.exists({username: username});
-
-	if (exists) {
-		res.json({
-			status: 'failure',
-			data: {username: 'El usuario ya existe.'}
 		});
 
 		return;
@@ -47,7 +51,7 @@ const create = async (req, res, next) => {
 		}
 
 		const properties = {
-			username: username,
+			username: req.body.username,
 			password: hashedPassword,
 			salt: salt,
 			name: req.body.name,
@@ -75,11 +79,30 @@ const create = async (req, res, next) => {
 	});
 };
 
-const register = async (req, res) => {
+const login = async (req, res, next) => {
+	const rules = {
+		username: usernameRules,
+		password: passwordRules
+	};
+
+	const validator = make(req.body, rules, {}, validatorAttributes);
+
+	if (!validator.validate()) {
+		res.json({
+			status: 'failure',
+			data: validator.errors().all()
+		});
+
+		return;
+	}
+};
+
+const viweRegister = async (req, res) => {
     res.render('register', {});
 }
 
 module.exports = {
-	create,
-	register
+	create: create,
+	login: login,
+	register: viweRegister
 };

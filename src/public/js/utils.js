@@ -51,10 +51,10 @@ function showBackValidations($form, validations) {
 
 		if (fieldName in validations) {
 			input.removeClass('is-valid').addClass('is-invalid');
-			$(this).siblings('.invalid-feedback').text(validations[fieldName]);
+			$(this).siblings('.invalid-feedback').text(validations[fieldName][0]);
 
 			if (firstInput == null) {
-				notifyFailure(validations[fieldName]);
+				notifyFailure(validations[fieldName][0]);
 				firstInput = input;
 				firstInput.trigger('focus');
 			}

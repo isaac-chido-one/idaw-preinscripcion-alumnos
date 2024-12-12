@@ -2,11 +2,19 @@ const Applicant = require('../models/applicant');
 const { make, regex } = require('simple-body-validator');
 const fs = require('fs');
 const path = require('path');
-const curpRule = regex(/^[A-Za-z]{4}\d{6}[HMhm][A-Za-z]{5}[A-Za-z0-9]\d$/);
+const curpRules = ['required', 'string', regex(/^[A-Za-z]{4}\d{6}[HMhm][A-Za-z]{5}[A-Za-z0-9]\d$/)];
+const validatorAttributes = {
+	curp: 'CURP',
+	dob: 'fecha de nacimiento',
+	firstName: 'nombres',
+	lastName: 'primer apellido',
+	secondLastName: 'segundo apellido',
+	state: 'estado de nacimiento'
+};
 
 const create = async (req, res, next) => {
 	const rules = {
-		curp: ['required', 'string', curpRule],
+		curp: curpRules,
 		dob: ['required', 'date', regex(/^(19|20)\d{2}\-(0[1-9]|1[012])\-[0-3]\d$/)],
 		firstName: ['required', 'string'],
 		lastName: ['required', 'string'],
@@ -14,7 +22,7 @@ const create = async (req, res, next) => {
 		state: ['required', 'string', 'in:AS,BC,BS,CC,CL,CM,CS,CH,CX,DF,DG,GT,GR,HG,JC,MC,MN,MS,NT,NL,OC,PL,QT,QR,SP,SL,SR,TC,TS,TL,VZ,YN,ZS']
 	};
 
-	const validator = make(req.body, rules);
+	const validator = make(req.body, rules, {}, validatorAttributes);
 
 	if (!validator.validate()) {
 		res.json({
@@ -65,8 +73,8 @@ const index = async (req, res, next) => {
 };
 
 const show = async (req, res, next) => {
-	const rules = {curp: ['required', curpRule]};
-	const validator = make(req.params, rules);
+	const rules = {curp: curpRules};
+	const validator = make(req.params, rules, {}, validatorAttributes);
 
 	if (!validator.validate()) {
 		res.json({
@@ -83,8 +91,8 @@ const show = async (req, res, next) => {
 };
 
 const update = async (req, res, next) => {
-	const rules = {curp: ['required', curpRule]};
-	const validator = make(req.params, rules);
+	const rules = {curp: curpRules};
+	const validator = make(req.params, rules, {}, validatorAttributes);
 
 	if (!validator.validate()) {
 		res.json({
@@ -100,7 +108,7 @@ const update = async (req, res, next) => {
 	if (result == null) {
 		res.json({
 			status: 'failure',
-			data: {curp: 'No se encontró la información del alumno.'}
+			data: {curp: ['No se encontró la información del alumno.']}
 		});
 	} else {
 		res.json({

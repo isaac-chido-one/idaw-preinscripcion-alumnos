@@ -8,6 +8,8 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
 app.use('/', require(__dirname + '/routes/index'));
+app.use('/', require(__dirname + '/routes/applicants'));
+app.use('/', require(__dirname + '/routes/users'));
 
 async function main() {
 	try {
