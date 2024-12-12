@@ -1,6 +1,6 @@
 (() => {
 
-	function responseRegister(response) {
+	function responseLogin(response) {
 		if (response.status == 'success') {
 			const $form = $('form.needs-validation');
 			$form.find('input[name=name]').val('');
@@ -18,39 +18,35 @@
 		}
 	}
 
-	function requestRegister($form) {
-		const name = $form.find('input[name=name]').val().trim();
+	function requestLogin($form) {
 		const username = $form.find('input[name=username]').val();
 		const password = $form.find('input[name=password]').val();
-		const role = $form.find('input[name=role]:checked').val();
 		$.ajax({
 			async: true,
 			data: {
-				name,
 				username,
-				password,
-				role
+				password
 			},
 			method: 'POST',
-			success: responseRegister,
-			url: '/users/create'
+			success: responseLogin,
+			url: '/users/login'
 		});
 	}
 
-	function initializeRegister() {
+	function initializeLogin() {
 		const $form = $('form.needs-validation');
 
 		$form.on('submit', function(e) {
 			e.preventDefault(); // prevent native submit
 
 			if ($form.get(0).checkValidity()) {
-				requestRegister($form);
+				requestLogin($form);
 			} else {
 				showFrontValidations($form);
 			}
 		});
 	}
 
-	window.setTimeout(initializeRegister);
+	window.setTimeout(initializeLogin);
 
 })();

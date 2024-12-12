@@ -1,7 +1,7 @@
 (() => {
 	'use strict'
 
-	function responseApplicantCreate(responseText, statusText, xhr) {
+	function responsePreinscription(responseText, statusText, xhr) {
 		if (xhr.responseJSON.status == 'success') {
 			notifySuccess(xhr.responseJSON.message);
 		} else if (xhr.responseJSON.status == 'failure') {
@@ -12,12 +12,12 @@
 		}
 	}
 
-	function requestApplicantCreate($form) {
+	function requestPreinscription($form) {
 		$form.ajaxSubmit({
 			dataType: 'json',
 			method: 'POST',
 			resetForm: false,
-			success: responseApplicantCreate,
+			success: responsePreinscription,
 			type: 'POST'
 		});
 	}
@@ -29,7 +29,7 @@
 			e.preventDefault(); // prevent native submit
 
 			if ($form.get(0).checkValidity()) {
-				requestApplicantCreate($form);
+				requestPreinscription($form);
 			} else {
 				showFrontValidations($form);
 			}

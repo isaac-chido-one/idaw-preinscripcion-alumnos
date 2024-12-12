@@ -1,7 +1,6 @@
 const crypto = require('crypto');
 const { make, register } = require('simple-body-validator');
 const User = require('../models/user');
-const usernameRules = ['required', 'string', 'email'];
 const passwordRules = ['required', 'string', 'min:6'];
 const validatorAttributes = {
 	name: 'nombre o alias',
@@ -10,7 +9,7 @@ const validatorAttributes = {
 	role: 'rol de usuario'
 };
 
-register('username_avalable', async function(username) {
+register('username_available', async function(username) {
 	const exists = await User.exists({username: username});
 
 	return !exists;
@@ -21,7 +20,7 @@ register('username_avalable', async function(username) {
 const create = async (req, res, next) => {
 	const rules = {
 		name: ['required', 'string'],
-		username: ['required', 'string', 'email', 'username_avalable'],
+		username: ['required', 'string', 'email', 'username_available'],
 		password: passwordRules,
 		role: ['required', 'integer', 'in:1,2']
 	};
@@ -81,7 +80,7 @@ const create = async (req, res, next) => {
 
 const login = async (req, res, next) => {
 	const rules = {
-		username: usernameRules,
+		username: ['required', 'string', 'email'],
 		password: passwordRules
 	};
 
@@ -95,14 +94,81 @@ const login = async (req, res, next) => {
 
 		return;
 	}
+
+	const username = req.body.username;
+	const user = await User.findOne({username});
+
+	if (user == null) {
+		res.json({
+			status: 'failure',
+			data: {username: ['Las credenciales son incorrectas.']},
+			debug: 'Username not exists'
+		});
+
+		return false;
+	}
+
+	crypto.pbkdf2(req.body.password, user.salt, 310000, 32, 'sha256', async function(err, hashedPassword) {
+		if (err) {
+			res.json({
+				status: 'error',
+				data: err
+			});
+
+			return;
+		}
+
+		const isValidPassword = crypto.timingSafeEqual(user.password, hashedPassword);
+
+		if (isValidPassword) {
+			res.json({
+				status: 'success',
+				message: 'Bienvenido',
+				url: user.role == 1 ? '/validators' : '/responsibles'
+			});
+		} else {
+			res.json({
+				status: 'failure',
+				data: {username: ['Las credenciales son incorrectas.']},
+				debug: 'Invalid password'
+			});
+		}
+	});
+
+
+/*
+  // login logic to validate req.body.user and req.body.pass
+  // would be implemented here. for this example any combo works
+
+  // regenerate the session, which is good practice to help
+  // guard against forms of session fixation
+  req.session.regenerate(function (err) {
+    if (err) next(err)
+
+    // store user information in session, typically a user id
+    req.session.user = req.body.user
+
+    // save the session before redirection to ensure page
+    // load does not happen before session is saved
+    req.session.save(function (err) {
+      if (err) return next(err)
+      res.redirect('/')
+    })
+  })
+*/
 };
 
-const viweRegister = async (req, res) => {
+const viewLogin = async (req, res) => {
+    res.render('login', {});
+}
+
+const viewRegister = async (req, res) => {
     res.render('register', {});
 }
 
 module.exports = {
-	create: create,
-	login: login,
-	register: viweRegister
+	create,
+	login,
+	viewLogin,
+	viewRegister
 };
