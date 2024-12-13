@@ -1,4 +1,4 @@
-(() => {
+(($) => {
 
 	function responseLogin(response) {
 		if (response.status == 'success') {
@@ -46,6 +46,8 @@
 		});
 	}
 
-	window.setTimeout(initializeLogin);
+	$(function() {
+		window.setTimeout(initializeLogin);
+	});
 
-})();
+})(jQuery);

@@ -1,4 +1,4 @@
-(() => {
+(($) => {
 
 	function responseRegister(response) {
 		if (response.status == 'success') {
@@ -51,6 +51,8 @@
 		});
 	}
 
-	window.setTimeout(initializeRegister);
+	$(function() {
+		window.setTimeout(initializeRegister);
+	});
 
-})();
+})(jQuery);

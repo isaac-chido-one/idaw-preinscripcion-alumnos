@@ -1,5 +1,5 @@
 
-(() => {
+(($) => {
 	let $modal = null, table = null;
 
 	function openModalVoucher (curp) {
@@ -46,6 +46,8 @@
 		});
 	}
 
-	window.setTimeout(initializeValidators);
+	$(function() {
+		window.setTimeout(initializeValidators);
+	});
 
-})();
+})(jQuery);

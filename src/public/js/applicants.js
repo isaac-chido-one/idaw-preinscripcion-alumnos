@@ -1,4 +1,4 @@
-(() => {
+(($) => {
 	'use strict'
 
 	function responsePreinscription(responseText, statusText, xhr) {
@@ -88,6 +88,8 @@
 		});
 	}
 
-	window.setTimeout(initializeApplicants);
+	$(function() {
+		window.setTimeout(initializeApplicants);
+	});
 
-})();
+})(jQuery);

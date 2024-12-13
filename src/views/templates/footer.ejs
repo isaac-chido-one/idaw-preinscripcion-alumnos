@@ -31,5 +31,8 @@
 		<script src="/js/dataTables.js"></script>
 		<script src="/js/dataTables.bootstrap5.js"></script>
 		<script src="/js/utils.js"></script>
+		<% if (typeof viewScript == 'string') { %>
+		<script src="/js/<%= viewScript %>.js"></script>
+		<% } %>
 	</body>
 </html>
