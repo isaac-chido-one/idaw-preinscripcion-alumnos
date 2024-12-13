@@ -2,10 +2,12 @@
 	'use strict'
 
 	function responsePreinscription(responseText, statusText, xhr) {
+		const $form = $('form.needs-validation');
+
 		if (xhr.responseJSON.status == 'success') {
+			$form.find('button[type=reset]').trigger('click');
 			notifySuccess(xhr.responseJSON.message);
 		} else if (xhr.responseJSON.status == 'failure') {
-			const $form = $('form.needs-validation');
 			showBackValidations($form, xhr.responseJSON.data);
 		} else {
 			console.warn(xhr.responseJSON);
