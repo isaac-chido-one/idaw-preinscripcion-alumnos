@@ -31,44 +31,30 @@
                     </div>
 
                     <div class="col-12">
+                        <label for="gender" class="form-label">Género</label>
+                        <select class="form-control" id="gender" name="gender" required>
+                            <option value="">Seleccionar ...</option>
+                            <% for (const code in genders) { %>
+                            <option value="<%= code %>"><%= genders[code] %></option>
+                            <% } %>
+                            <hr />
+                            <option value="NE"><%= states.NE %></option>
+                        </select>
+                        <div class="invalid-feedback"></div>
+                    </div>
+
+                    <div class="col-12">
                         <label for="state" class="form-label">Estado de nacimiento</label>
                         <select class="form-control" id="state" name="state" required>
                             <option value="">Seleccionar ...</option>
-                            <option value="AS">Aguascalientes</option>
-                            <option value="BC">Baja California</option>
-                            <option value="BS">Baja California Sur</option>
-                            <option value="CC">Campeche</option>
-                            <option value="CL">Coahuila</option>
-                            <option value="CM">Colima</option>
-                            <option value="CS">Chiapas</option>
-                            <option value="CH">Chihuahua</option>
-                            <option value="CX">Ciudad de México</option>
-                            <option value="DF">Distrito Federal</option>
-                            <option value="DG">Durango</option>
-                            <option value="GT">Guanajuato</option>
-                            <option value="GR">Guerrero</option>
-                            <option value="HG">Hidalgo</option>
-                            <option value="JC">Jalisco</option>
-                            <option value="MC">México</option>
-                            <option value="MN">Michoacán</option>
-                            <option value="MS">Morelos</option>
-                            <option value="NT">Nayarit</option>
-                            <option value="NL">Nuevo León</option>
-                            <option value="OC">Oaxaca</option>
-                            <option value="PL">Puebla</option>
-                            <option value="QT">Querétaro</option>
-                            <option value="QR">Quintana Roo</option>
-                            <option value="SP">San Luis Potosí</option>
-                            <option value="SL">Sinaloa</option>
-                            <option value="SR">Sonora</option>
-                            <option value="TC">Tabasco</option>
-                            <option value="TS">Tamaulipas</option>
-                            <option value="TL">Tlaxcala</option>
-                            <option value="VZ">Veracruz</option>
-                            <option value="YN">Yucatán</option>
-                            <option value="ZS">Zacatecas</option>
+                            <% for (const code in states) {
+                                if (code != 'NE') { %>
+                            <option value="<%= code %>"><%= states[code] %></option>
+                            <%
+                                }
+                            } %>
                             <hr />
-                            <option value="NE">Nacido en el Extranjero</option>
+                            <option value="NE"><%= states.NE %></option>
                         </select>
                         <div class="invalid-feedback"></div>
                     </div>
@@ -78,7 +64,7 @@
 
                 <div class="row gy-3">
                     <div class="col-md-4">
-                        <button class="w-100 btn btn-info" type="button">Generar CURP</button>
+                        <button class="w-100 btn btn-info js-generate" type="button">Generar CURP</button>
                     </div>
 
                     <div class="col-md-8">
@@ -102,7 +88,13 @@
 
                 <hr class="my-4">
 
-                <button class="w-100 btn btn-primary btn-lg" type="submit">Registrar preinscripción</button>
+                <div class="text-end">
+                    <div class="d-inline-flex gap-2 mb-5">
+                        <button class="d-inline-flex align-items-center btn btn-outline-secondary btn-lg px-4" type="reset">Limpiar</button>
+                        <button class="d-inline-flex align-items-center btn btn-primary btn-lg px-4" type="submit">Guardar</button>
+                    </div>
+                </div>
+
             </form>
         </div>
     </div>

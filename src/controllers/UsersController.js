@@ -33,23 +33,19 @@ const create = async (req, res, next) => {
 	const validationResult = await validator.validateAsync();
 
 	if (!validationResult) {
-		res.json({
+		return res.json({
 			status: 'failure',
 			data: validator.errors().all()
 		});
-
-		return;
 	}
 
 	const salt = crypto.randomBytes(16);
 	crypto.pbkdf2(req.body.password, salt, iterations, keylen, digest, async function(err, hashedPassword) {
 		if (err) {
-			res.json({
+			return res.json({
 				status: 'error',
 				data: err
 			});
-
-			return;
 		}
 
 		const properties = {
@@ -65,15 +61,13 @@ const create = async (req, res, next) => {
 		try {
 			await user.save();
 		} catch (err) {
-			res.json({
+			return res.json({
 				status: 'error',
 				data: err
 			});
-
-			return;
 		}
 
-		res.json({
+		return res.json({
 			status: 'success',
 			message: 'Usuario creado correctamente.',
 			url: '/login'
@@ -90,25 +84,21 @@ const login = async (req, res, next) => {
 	const validator = make(req.body, rules, {}, validatorAttributes);
 
 	if (!validator.validate()) {
-		res.json({
+		return res.json({
 			status: 'failure',
 			data: validator.errors().all()
 		});
-
-		return;
 	}
 
 	const username = req.body.username;
 	const user = await User.findOne({username});
 
 	if (user == null) {
-		res.json({
+		return res.json({
 			status: 'failure',
 			data: {username: ['Las credenciales son incorrectas.']},
 			debug: 'Username does not exist.'
 		});
-
-		return false;
 	}
 
 	crypto.pbkdf2(req.body.password, user.salt, iterations, keylen, digest, async function(err, hashedPassword) {
@@ -165,22 +155,18 @@ const logout = async (req, res, next) => {
 
 	req.session.save(function (err) {
 		if (err) {
-			res.json({
+			return res.json({
 				status: 'error',
 				data: err
 			});
-
-			return;
 		}
 
 		req.session.regenerate(function (err) {
 			if (err) {
-				res.json({
+				return res.json({
 					status: 'error',
 					data: err
 				});
-
-				return;
 			}
 
 			res.redirect('/');

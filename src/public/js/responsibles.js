@@ -25,8 +25,9 @@
 				{ data: 'lastName' },
 				{ data: 'secondLastName' },
 				{ data: 'firstName' },
-				{ data: 'dob', renderDate},
+				{ data: 'dob', render: renderDate},
 				{ data: 'state' },
+				{ data: 'gender' },
 				{ data: 'validated', className: 'text-center', render: function (data, type) {
 					if (type === 'display') {
 						return data ? 'Si' : 'No';

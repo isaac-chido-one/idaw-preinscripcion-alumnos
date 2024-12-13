@@ -58,6 +58,7 @@
 				{ data: 'secondLastName' },
 				{ data: 'firstName' },
 				{ data: 'dob', render: renderDate},
+				{ data: 'gender' },
 				{ data: 'state' },
 				{ className: 'text-center', defaultContent: renderBtnVoucher}
 			],
@@ -73,7 +74,7 @@
 				}
 
 				$btnVoucher.on('click', function() {
-					$openModalVoucher(data.curp, data.validated);
+					openModalVoucher(data.curp, data.validated);
 				});
 			},
 			oLanguage: datatableTranslations()

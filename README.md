@@ -5,7 +5,9 @@
 2. Abrir la terminal o la línea de comandos.
 3. En la terminal ir o crear una carpeta para descargar el código.
 4. Ejecutar el siguiente comando: `git clone https://github.com/isaac-chido-one/idaw-preinscripcion-alumnos.git`
-5. Ir a la carpeta creada idaw-preinscripcion-alumnos
+5. Ir a la carpeta creada idaw-preinscripcion-alumnos: `cd idaw-preinscripcion-alumnos`
+6. Copiar el erchivo .example.env a un nuevo archivo llamado .env: en posix `cp .example.env .env` o en windows `copy .example.env .env`
+7. Em ambiente de producción, editar el archivo .env para asignar a la variable `MONGODB_URI` la cadena de conexión a la base de datos.
 
 ## Pasos para bajar el código comprimido
 1. Abrir la url [https://github.com/isaac-chido-one/idaw-preinscripcion-alumnos](URL)
