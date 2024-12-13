@@ -119,7 +119,7 @@ const update = async (req, res, next) => {
 };
 
 const view = async (req, res) => {
-    res.render('applicants', {});
+    res.render('applicants', {authenticated: true});
 }
 
 module.exports = {

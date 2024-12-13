@@ -1,3 +1,25 @@
-<%- include('templates/header') %>
-Responsables de unidades
+<%- include('templates/header', {authenticated: authenticated}) %>
+
+<table id="table-applicants" class="display table table-striped" style="width:100%;">
+	<thead>
+		<tr>
+			<th>CURP</th>
+			<th>Primer apellido</th>
+			<th>Segundo apellido</th>
+			<th>Nombres</th>
+			<th>Fecha nac.</th>
+			<th>Estado</th>
+			<th>Validado</th>
+			<th>Comprobante</th>
+		</tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
+
+<div class="d-none js-template-btn-voucher">
+	<a href="#" class="js-voucher" title="Ver comprobante"><i class="bi bi-box-arrow-up-right"></i></a>
+</div>
+
+<script src="/js/responsibles.js"></script>
 <%- include('templates/footer') %>

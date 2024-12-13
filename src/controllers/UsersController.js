@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const { make, register } = require('simple-body-validator');
+const session = require('express-session');
 const User = require('../models/user');
 const passwordRules = ['required', 'string', 'min:6'];
 const validatorAttributes = {
@@ -8,6 +9,9 @@ const validatorAttributes = {
 	password: 'contraseña',
 	role: 'rol de usuario'
 };
+const iterations = 310000;
+const keylen = 32;
+const digest = 'sha256';
 
 register('username_available', async function(username) {
 	const exists = await User.exists({username: username});
@@ -38,7 +42,7 @@ const create = async (req, res, next) => {
 	}
 
 	const salt = crypto.randomBytes(16);
-	crypto.pbkdf2(req.body.password, salt, 310000, 32, 'sha256', async function(err, hashedPassword) {
+	crypto.pbkdf2(req.body.password, salt, iterations, keylen, digest, async function(err, hashedPassword) {
 		if (err) {
 			res.json({
 				status: 'error',
@@ -101,13 +105,65 @@ const login = async (req, res, next) => {
 		res.json({
 			status: 'failure',
 			data: {username: ['Las credenciales son incorrectas.']},
-			debug: 'Username not exists'
+			debug: 'Username does not exist.'
 		});
 
 		return false;
 	}
 
-	crypto.pbkdf2(req.body.password, user.salt, 310000, 32, 'sha256', async function(err, hashedPassword) {
+	crypto.pbkdf2(req.body.password, user.salt, iterations, keylen, digest, async function(err, hashedPassword) {
+		if (err) {
+			return res.json({
+				status: 'error',
+				data: err
+			});
+		}
+
+		const isValidPassword = crypto.timingSafeEqual(user.password, hashedPassword);
+
+		if (!isValidPassword) {
+			return res.json({
+				status: 'failure',
+				data: {username: ['Las credenciales son incorrectas.']},
+				debug: 'Incorrect password'
+			});
+		}
+
+		req.session.regenerate(function (err) {
+			if (err) {
+				return res.json({
+					status: 'error',
+					data: err
+				});
+			}
+
+			req.session.user = {
+				name: user.name,
+				role: user.role
+			};
+
+			req.session.save(function (err) {
+				if (err) {
+					return res.json({
+						status: 'error',
+						data: err
+					});
+				}
+
+				return res.json({
+					status: 'success',
+					message: 'Bienvenido ' + user.name,
+					url: user.role == 1 ? '/validators' : '/responsibles'
+				});
+			});
+		});
+	});
+};
+
+const logout = async (req, res, next) => {
+	req.session.user = null;
+
+	req.session.save(function (err) {
 		if (err) {
 			res.json({
 				status: 'error',
@@ -117,60 +173,33 @@ const login = async (req, res, next) => {
 			return;
 		}
 
-		const isValidPassword = crypto.timingSafeEqual(user.password, hashedPassword);
+		req.session.regenerate(function (err) {
+			if (err) {
+				res.json({
+					status: 'error',
+					data: err
+				});
 
-		if (isValidPassword) {
-			res.json({
-				status: 'success',
-				message: 'Bienvenido',
-				url: user.role == 1 ? '/validators' : '/responsibles'
-			});
-		} else {
-			res.json({
-				status: 'failure',
-				data: {username: ['Las credenciales son incorrectas.']},
-				debug: 'Invalid password',
-				d1: req.body.password,
-				d2: user.salt,
-				d3: isValidPassword
-			});
-		}
+				return;
+			}
+
+			res.redirect('/');
+		})
 	});
-
-
-/*
-  // login logic to validate req.body.user and req.body.pass
-  // would be implemented here. for this example any combo works
-
-  // regenerate the session, which is good practice to help
-  // guard against forms of session fixation
-  req.session.regenerate(function (err) {
-    if (err) next(err)
-
-    // store user information in session, typically a user id
-    req.session.user = req.body.user
-
-    // save the session before redirection to ensure page
-    // load does not happen before session is saved
-    req.session.save(function (err) {
-      if (err) return next(err)
-      res.redirect('/')
-    })
-  })
-*/
 };
 
 const viewLogin = async (req, res) => {
-    res.render('login', {});
+    res.render('login', {authenticated: false});
 }
 
 const viewRegister = async (req, res) => {
-    res.render('register', {});
+    res.render('register', {authenticated: false});
 }
 
 module.exports = {
 	create,
 	login,
+	logout,
 	viewLogin,
 	viewRegister
 };

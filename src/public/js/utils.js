@@ -64,3 +64,50 @@ function showBackValidations($form, validations) {
 		}
 	});
 }
+
+function datatableTranslations() {
+	return {
+		oAria: {
+			orderable: ": Click para ordenar de forma ascendende",
+			orderableReverse: ": Click para ordenar de forma descendende",
+			orderableRemove: ": Click para desordenar",
+			paginate: {
+				first: 'Primera',
+				last: '&Uacute;ltima',
+				next: 'Siguiente',
+				previous: 'Anterior',
+				number: ''
+			}
+		},
+		oPaginate: {
+			sFirst: '<i class="bi bi-chevron-double-left"></i>',
+			sLast: '<i class="bi bi-chevron-double-right"></i>',
+			sNext: '<i class="bi bi-chevron-right"></i>',
+			sPrevious: '<i class="bi bi-chevron-left"></i>'
+		},
+		entries: {
+			_: "registros",
+			1: "registro"
+		},
+		sEmptyTable: "Sin informaci&oacute;n disponible",
+		sInfo: "Mostrado del _START_ al _END_ de _TOTAL_ _ENTRIES-TOTAL_",
+		sInfoEmpty: "Ning&uacute;n resultado",
+		sInfoFiltered: "(filtrado de _MAX_ total _ENTRIES-MAX_)",
+		sDecimal: ".",
+		sThousands: ",",
+		sLengthMenu: "_MENU_ _ENTRIES_ por p&aacute;gina",
+		sLoadingRecords: "Cargando...",
+		sProcessing: "Procesando...",
+		sSearch: "Buscar:",
+		sSearchPlaceholder: "Buscar por CURP o nombre",
+		sZeroRecords: "Ning&uacute;n registro"
+	};
+}
+
+function renderDate (data, type) {
+	if (type === 'display') {
+		return data.substring(0, 10);
+	}
+
+	return data;
+}

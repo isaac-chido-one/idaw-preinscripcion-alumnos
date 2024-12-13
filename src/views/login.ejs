@@ -1,4 +1,4 @@
-<%- include('templates/header') %>
+<%- include('templates/header', {authenticated: authenticated}) %>
 <main>
     <div class="row g-5">
         <div class="col-md-7 col-lg-8">
@@ -36,7 +36,12 @@
 
                 <hr class="my-4">
 
-                <button class="w-100 btn btn-primary btn-lg" type="submit">Acceder</button>
+                <div class="text-end">
+                    <div class="d-inline-flex gap-2 mb-5">
+                        <a class="btn btn-outline-secondary btn-lg px-4" href="/register">Crear cuenta</a>
+                        <button class="d-inline-flex align-items-center btn btn-primary btn-lg px-4" type="submit">Acceder</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>

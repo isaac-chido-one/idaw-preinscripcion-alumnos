@@ -1,4 +1,4 @@
-<%- include('templates/header') %>
+<%- include('templates/header', {authenticated: authenticated}) %>
 
 <main>
     <div class="row g-5">
@@ -107,5 +107,6 @@
         </div>
     </div>
 </main>
+
 <script src="/js/applicants.js"></script>
 <%- include('templates/footer') %>
