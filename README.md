@@ -1,18 +1,13 @@
 # Aplicación para preinscripción de alumnos en línea.
 
-## Pasos para bajar el código con git
+## Pasos para bajar el código con git y establecer conexión a la db.
 1. Instalar git [https://git-scm.com/downloads/win](URL)
 2. Abrir la terminal o la línea de comandos.
 3. En la terminal ir o crear una carpeta para descargar el código.
 4. Ejecutar el siguiente comando: `git clone https://github.com/isaac-chido-one/idaw-preinscripcion-alumnos.git`
 5. Ir a la carpeta creada idaw-preinscripcion-alumnos: `cd idaw-preinscripcion-alumnos`
 6. Copiar el erchivo .example.env a un nuevo archivo llamado .env: en posix `cp .example.env .env` o en windows `copy .example.env .env`
-7. Em ambiente de producción, editar el archivo .env para asignar a la variable `MONGODB_URI` la cadena de conexión a la base de datos.
-
-## Pasos para bajar el código comprimido
-1. Abrir la url [https://github.com/isaac-chido-one/idaw-preinscripcion-alumnos](URL)
-2. Click en el botón verde Code.
-3. Click en el panel inferior Download ZIP.
+7. En ambiente de producción, editar el archivo .env para asignar a la variable `MONGODB_URI` la cadena de conexión a la base de datos.
 
 ## Pasos para levantar el servicio con node local
 1. Instalar node, de preferencia la versión 20.11.1: [https://nodejs.org/en/download/prebuilt-installer](URL)
@@ -61,11 +56,11 @@ Pantalla para verificación de pago de alumnos:
 * Presentar datos del alumno (nombre completo, sexo, fecha de nacimiento y entidad)
 * Presentar imagen de comprobante de pago
 * Casilla de verificación para que el operador valide el pago
-* Botón de guardar (básicamente se guardara el estatus de que el alumno ya pago)
+* Botón de guardar (básicamente se guardara el estatus de que el alumno ya pagó)
 
 Lista de alumnos con estatus de pago pagado
 
 * Generar una tabla en pantalla de los alumnos con los siguientes datos
 * Curp, Nombre completo, Estatus de pago
 
-## Este proyecto será permitido a un solo equipo
+## Este proyecto será permitido a un sólo equipo
